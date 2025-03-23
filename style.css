@@ -111,3 +111,28 @@ body {
     background: red;
     color: white;
 }
+
+.order-container {
+    max-width: 500px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    box-shadow: 2px 2px 10px rgba(0,0,0,0.1);
+    text-align: center;
+}
+
+.order-container input, 
+.order-container textarea, 
+.order-container select {
+    width: 100%;
+    padding: 8px;
+    margin: 5px 0;
+}
+
+.order-container button {
+    padding: 10px;
+    background: green;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
