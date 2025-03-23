@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order - The Crochet Nest</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/emailjs-com@2/dist/email.min.js"></script>
+    <script>
+        (function(){
+            emailjs.init("your_emailjs_user_id"); // Replace with your EmailJS User ID
+        })();
+
+        function sendOrderDetails(event) {
+            event.preventDefault(); // Prevent form submission
+
+            let name = document.getElementById("name").value;
+            let address = document.getElementById("address").value;
+            let paymentMode = document.getElementById("payment-mode").value;
+            let totalAmount = document.getElementById("total-amount").innerText;
+
+            let templateParams = {
+                user_name: name,
+                user_address: address,
+                payment_mode: paymentMode,
+                total_amount: totalAmount
+            };
+
+            emailjs.send("your_service_id", "your_template_id", templateParams)
+            .then(function(response) {
+                alert("Order placed successfully!");
+                localStorage.removeItem("cart"); // Clear cart after order
+                window.location.href = "index.html"; // Redirect to home page
+            }, function(error) {
+                alert("Error: " + JSON.stringify(error));
+            });
+        }
+    </script>
+</head>
+<body>
+
+    <!-- Order Section -->
+    <div class="order-container">
+        <h2>Order Details</h2>
+        <form onsubmit="sendOrderDetails(event)">
+            <label>Name:</label>
+            <input type="text" id="name" required><br>
+
+            <label>Address:</label>
+            <textarea id="address" required></textarea><br>
+
+            <label>Payment Mode:</label>
+            <select id="payment-mode" required>
+                <option value="Cash on Delivery">Cash on Delivery</option>
+                <option value="Bank Transfer">Bank Transfer</option>
+            </select><br>
+
+            <h3>Total Amount: ₹<span id="total-amount">0</span></h3>
+
+            <button type="submit">Proceed to Order</button>
+        </form>
+    </div>
+
+    <script>
+        // Load total amount from cart
+        document.addEventListener("DOMContentLoaded", function() {
+            let cartItems = JSON.parse(localStorage.getItem("cart")) || [];
+            let total = cartItems.length * 500; // Assuming ₹500 per item
+            document.getElementById("total-amount").innerText = total;
+        });
+    </script>
+
+</body>
+</html>
