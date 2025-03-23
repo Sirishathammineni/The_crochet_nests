@@ -76,3 +76,38 @@ body {
     font-size: 20px;
     cursor: pointer;
 }
+.cart-container {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    box-shadow: 2px 2px 10px rgba(0,0,0,0.1);
+    text-align: center;
+}
+
+.cart-container ul {
+    list-style: none;
+    padding: 0;
+}
+
+.cart-container li {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.confirm-order-btn, .clear-cart-btn {
+    padding: 10px;
+    margin: 10px;
+    border: none;
+    cursor: pointer;
+}
+
+.confirm-order-btn {
+    background: green;
+    color: white;
+}
+
+.clear-cart-btn {
+    background: red;
+    color: white;
+}
